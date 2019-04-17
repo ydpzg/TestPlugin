@@ -1,0 +1,52 @@
+
+//引入plugins
+//plugins {
+//    id 'com.android.application'
+//    id 'com.kalengo.customplugin'
+//}
+
+apply plugin: 'com.android.application'
+//使用具体名称引用plugin
+apply plugin: CustomPlugin
+
+//使用包名引用plugin
+//apply plugin: 'com.kalengo.customplugin'
+
+greeting {
+    message = "The day is Monday!"
+    greeter = "Hello greeter!"
+}
+
+android {
+    compileSdkVersion 28
+    buildToolsVersion "28.0.3"
+    defaultConfig {
+        applicationId "com.kalengo.testplugin"
+        minSdkVersion 14
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'androidx.appcompat:appcompat:1.0.0-alpha1'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.2'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test:runner:1.1.0-alpha3'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0-alpha3'
+    implementation project(path: ':commonlib')
+}
+
